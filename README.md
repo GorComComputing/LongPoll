@@ -10,6 +10,14 @@
 
 Статус проекта: Завершен.
 
+Build
+```bash
+make
+```
+Run
+```bash
+./main
+```
  
 Copyright (c) 2023 Evgeny Goryachev    
 Gor.Com 
