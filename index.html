@@ -1,0 +1,62 @@
+<html>
+<script language=javascript>
+
+
+// установка longpoll
+function longpoll(url, callback) {
+
+    var req = new XMLHttpRequest (); 
+    req.open ('GET', url, true); 
+
+    req.onreadystatechange = function (aEvt) {
+        if (req.readyState == 4) { 
+            if (req.status == 200) {
+                callback(req.responseText);
+                longpoll(url, callback);
+            } else {
+                alert ("long-poll connection lost");
+            }
+        }
+    };
+
+    req.send(null);
+}
+
+
+// действие на странице при получении сообщения с сервера
+function recv(msg) {
+    var box = document.getElementById("counter");
+    box.innerHTML += msg + "\n";
+}
+
+
+// обычная отправка на сервер сообщения
+function send() {
+
+
+    var box = document.getElementById("counter");
+
+  var req = new XMLHttpRequest (); 
+    req.open ('POST', "/push?rcpt=", true); 
+
+    req.onreadystatechange = function (aEvt) {
+        if (req.readyState == 4) { 
+            if (req.status == 200) {
+            } else {
+                alert ("failed to send!");
+            }
+        }
+  };
+  req.send("hi")
+
+  //box.innerHTML += "test" ;  
+}
+</script>
+<body onload="longpoll('/poll', recv);">
+
+<h1> Long-Poll Chat Demo </h1>
+
+<p id="counter"></p>
+<button onclick="send()" id="test">Test Button</button>
+</body>
+</html>
