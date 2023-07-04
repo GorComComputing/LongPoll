@@ -10,13 +10,12 @@
 
 Статус проекта: Завершен.
 
-Build
 ```bash
-make
-```
-Run
-```bash
-./main
+# Build
+$ make
+
+# Run
+$ ./main
 ```
  
 Copyright (c) 2023 Evgeny Goryachev    
